@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+     <div class="container">
+
+        <h1>todo app</h1>
+        <div class="input-field">
+            <input type="text" class="input-text" placeholder="Add text">
+            <button id="add-btn" class="fa fa-plus"></button>
+            
+        </div>
+        
+
+        <div class="output-field">
+            <!-- <div class="output">
+                <input type="text" class="output-text" readonly>
+                <button id="edit-btn" class="fa fa-pencil-square-o"></button>
+                <button id="delete-btn" class="fa fa-trash-o "></button>
+            </div> -->
+        </div>
+     </div>
+     
+
+
+
+
+
+
+     <style>
+        
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: system-ui;
+            text-transform: capitalize;
+            background: url(/images/moonwallpapergraphics.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .container{
+            background-color: white;
+            width: 50%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            border-radius: 3px;
+            margin-top: 20px;
+        }
+        .container h1{
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .container .input-field{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .input-field .input-text{
+             flex-grow: 1;
+             height: 40px;
+             margin-right: 10px;
+             padding-left:5px ;
+             outline: none;
+             border-radius: 0;
+             border: 1px solid grey;
+        }
+        .input-field button{
+            color: white;
+            background-color: rgb(132, 18, 132);
+            height: 39px;
+            width: 39px;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .container .output-field{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .output-field .output{
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .output .output-text{
+            flex-grow: 1;
+             height: 40px;
+             margin-right: 10px;
+             padding-left:5px ;
+             outline: none;
+             border-radius: 0;
+             border: none;
+             background-color: rgb(239, 235, 235);
+             color: black;
+        }
+        .output #edit-btn{
+            color: white;
+            background-color: rgb(28, 154, 12);
+            height: 39px;
+            width: 39px;
+            border: none;
+            font-size: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .output #delete-btn{
+            color: white;
+            background-color: rgb(171, 47, 10);
+            height: 39px;
+            width: 39px;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        button:hover{
+            opacity: 0.7;
+        }
+     </style>
+
+
+<script>
+const input=document.querySelector(".input-text")
+const add=document.querySelector("#add-btn")
+const outputField=document.querySelector(".output-field")
+const output=document.querySelector(".output-text")
+const edit=document.getElementById("edit-btn")
+const deletes=document.getElementById("delete-btn")
+
+
+add.addEventListener("click",function(){
+    let a=input.value
+    if(a=="")
+    {
+        alert("Text Something")
+    }
+    else
+    {
+        
+
+        let x=document.createElement("div")
+        x.classList.add("output")
+        outputField.appendChild(x)
+
+        let y=document.createElement("input")
+        y.classList.add("output-text")
+        y.type="text"
+        y.setAttribute("readonly","readonly")
+        y.value=a
+        x.appendChild(y)
+
+        let z=document.createElement("button")
+        z.setAttribute("id","edit-btn")
+        z.setAttribute("class","fa fa-pencil-square-o")
+        z.classList.add("active")
+        x.appendChild(z)
+
+        let r=document.createElement("button")
+        r.setAttribute("id","delete-btn")
+        r.setAttribute("class","fa fa-trash-o ")
+        x.appendChild(r)  
+
+        
+
+        r.addEventListener("click",function(){
+            outputField.removeChild(x)
+            input.focus()
+        })
+   
+
+        z.addEventListener("click",function(){
+            if(z.classList.contains("active")){
+                y.removeAttribute("readonly")
+                y.focus()
+                z.removeAttribute("class","fa fa-pencil-square-o")
+                z.setAttribute("class","fa fa-save")
+                z.classList.remove("active")
+                z.classList.add("passive")
+                z.style.backgroundColor="lightblue"
+                z.style.color="black"
+            }
+            else if(z.classList.contains("passive")){
+                y.setAttribute("readonly","readonly")
+                z.removeAttribute("class","fa fa-save")
+                z.setAttribute("class","fa fa-pencil-square-o")
+                z.classList.add("active")
+                z.classList.remove("passive")
+                z.style.backgroundColor="green"
+                z.style.color="white"
+                input.focus()
+            }    
+        })
+    }
+   
+    input.focus()
+    input.value=""
+})
+</script>
+</body>
+</html>
